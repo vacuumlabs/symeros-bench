@@ -10,15 +10,16 @@
 extern crate alloc;
 
 use alloc::vec::Vec;
+use borsh::{BorshDeserialize, BorshSerialize};
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, BorshSerialize, BorshDeserialize, Clone, Debug)]
 pub struct SignerVerification {
     pub pubkey: Vec<u8>,
     pub signature: Vec<u8>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, BorshSerialize, BorshDeserialize, Clone, Debug)]
 pub struct VerifyInput {
     pub message: Vec<u8>,
     pub signers: Vec<SignerVerification>,
@@ -74,7 +75,7 @@ pub mod verifier {
     pub mod ed25519 {
         use super::super::VerifyInput;
         use alloc::string::{String, ToString};
-        use ed25519_dalek::{Signature, Verifier, VerifyingKey};
+        use ed25519_dalek::{Signature, VerifyingKey};
 
         pub fn verify_all(input: &VerifyInput) -> Result<(), String> {
             for s in &input.signers {
@@ -85,7 +86,8 @@ pub mod verifier {
                     .map_err(|_| "pubkey-len".to_string())?;
                 let vk = VerifyingKey::from_bytes(&pk_arr).map_err(|_| "pubkey".to_string())?;
                 let sig = Signature::from_slice(&s.signature).map_err(|_| "sig".to_string())?;
-                vk.verify(&input.message, &sig)
+                // verify_strict mirrors LEZ v0.3.1 sequencer_stake::verify_approvals.
+                vk.verify_strict(&input.message, &sig)
                     .map_err(|_| "verify".to_string())?;
             }
             Ok(())

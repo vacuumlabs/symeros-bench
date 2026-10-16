@@ -1,4 +1,6 @@
+use borsh::{BorshDeserialize, BorshSerialize};
 use serde::{Deserialize, Serialize};
+use sha2::{Digest, Sha256};
 use tiny_keccak::{Hasher, Keccak};
 
 pub mod verifier;
@@ -50,7 +52,7 @@ impl Scheme {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, BorshSerialize, BorshDeserialize, Clone, Debug)]
 pub struct SignerVerification {
     /// Scheme-specific pubkey encoding.
     pub pubkey: Vec<u8>,
@@ -58,7 +60,7 @@ pub struct SignerVerification {
     pub signature: Vec<u8>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, BorshSerialize, BorshDeserialize, Clone, Debug)]
 pub struct VerifyInput {
     pub message: Vec<u8>,
     pub signers: Vec<SignerVerification>,
@@ -82,6 +84,18 @@ pub const SEEDS: &[[u8; 32]] = &[
     ],
 ];
 
+/// Signer seed `i`: upstream's 3 fixed seeds, then
+/// `sha256("lez-signature-bench/seed/" || i_le)` for i >= 3. All distinct.
+pub fn seed(i: usize) -> [u8; 32] {
+    if i < SEEDS.len() {
+        return SEEDS[i];
+    }
+    let mut h = Sha256::new();
+    h.update(b"lez-signature-bench/seed/");
+    h.update((i as u64).to_le_bytes());
+    h.finalize().into()
+}
+
 pub const MESSAGE: &[u8] = b"hello redstone";
 
 pub fn keccak256(bytes: &[u8]) -> [u8; 32] {
@@ -95,15 +109,11 @@ pub fn keccak256(bytes: &[u8]) -> [u8; 32] {
 /// Build a deterministic synthetic test vector for `scheme` with
 /// `num_signers` signers, all signing `MESSAGE`.
 pub fn make_test_vector(scheme: Scheme, num_signers: usize) -> VerifyInput {
-    assert!(
-        num_signers <= SEEDS.len(),
-        "only {} seeds available",
-        SEEDS.len()
-    );
-
-    let signers: Vec<SignerVerification> = SEEDS
+    // M distinct signers over the same message (a multisig approval set).
+    // The first 3 seeds are the upstream fixture's; the rest are derived.
+    let seeds: Vec<[u8; 32]> = (0..num_signers).map(seed).collect();
+    let signers: Vec<SignerVerification> = seeds
         .iter()
-        .take(num_signers)
         .map(|seed| match scheme {
             Scheme::EcdsaSecp256k1 => verifier::ecdsa_k256::sign(seed, MESSAGE),
             Scheme::SchnorrSecp256k1 => verifier::schnorr_k256::sign(seed, MESSAGE),
@@ -169,6 +179,17 @@ mod tests {
         verify(scheme, &v).unwrap_or_else(|e| panic!("{scheme:?} n={n} verify: {e}"));
     }
 
+    #[test]
+    fn eight_signers_are_distinct() {
+        for &scheme in &[Scheme::SchnorrSecp256k1, Scheme::Ed25519, Scheme::EcdsaP256] {
+            let v = make_test_vector(scheme, 8);
+            let mut pks: Vec<_> = v.signers.iter().map(|s| s.pubkey.clone()).collect();
+            pks.sort();
+            pks.dedup();
+            assert_eq!(pks.len(), 8, "{scheme:?}");
+        }
+    }
+
     fn flip_one_byte_fails(scheme: Scheme) {
         let mut v = make_test_vector(scheme, 1);
         v.signers[0].signature[0] ^= 0xff;
@@ -188,18 +209,21 @@ mod tests {
     fn round_trip_schnorr_secp256k1() {
         round_trip(Scheme::SchnorrSecp256k1, 1);
         round_trip(Scheme::SchnorrSecp256k1, 3);
+        round_trip(Scheme::SchnorrSecp256k1, 8);
     }
 
     #[test]
     fn round_trip_ed25519() {
         round_trip(Scheme::Ed25519, 1);
         round_trip(Scheme::Ed25519, 3);
+        round_trip(Scheme::Ed25519, 8);
     }
 
     #[test]
     fn round_trip_ecdsa_p256() {
         round_trip(Scheme::EcdsaP256, 1);
         round_trip(Scheme::EcdsaP256, 3);
+        round_trip(Scheme::EcdsaP256, 8);
     }
 
     #[test]

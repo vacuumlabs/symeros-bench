@@ -1,30 +1,22 @@
-use lez_signature_bench_programs::{VerifyInput, verifier};
-use nssa_core::program::{AccountPostState, ProgramInput, ProgramOutput, read_nssa_inputs};
+//! LEZ v0.3.1 plan/apply guest. `plan` turns the instruction (the approval set) into
+//! one effect on the first account; `apply` verifies every signature in that effect,
+//! mirroring where `sequencer_stake::verify_approvals` runs (inside `apply`).
+use lee_core::program::{Plan, PlanInput, run_program};
+use lez_signature_bench_programs::VerifyInput;
+#[allow(unused_imports)]
+use lez_signature_bench_programs::verifier;
+
+fn plan(input: &PlanInput, instruction: VerifyInput) -> Plan {
+    let mut plan = Plan::new(input);
+    plan.effect(&input.accounts[0], &instruction);
+    plan
+}
+
+fn apply(effect: VerifyInput, _pre_data: &[u8]) -> Option<Vec<u8>> {
+    verifier::ecdsa_k256::verify_all(&effect).expect("verify failed");
+    None
+}
 
 fn main() {
-    let (
-        ProgramInput {
-            self_program_id,
-            caller_program_id,
-            pre_states,
-            instruction,
-        },
-        instruction_data,
-    ) = read_nssa_inputs::<VerifyInput>();
-
-    verifier::ecdsa_k256::verify_all(&instruction).expect("verify failed");
-
-    let post_states: Vec<AccountPostState> = pre_states
-        .iter()
-        .map(|awm| AccountPostState::new(awm.account.clone()))
-        .collect();
-
-    ProgramOutput::new(
-        self_program_id,
-        caller_program_id,
-        instruction_data,
-        pre_states,
-        post_states,
-    )
-    .write();
+    run_program(plan, apply)
 }
