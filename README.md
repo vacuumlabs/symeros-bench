@@ -1,6 +1,6 @@
-# quorate-bench
+# symeros-bench
 
-Measurements behind Vacuumlabs' Logos RFP-005 multisig proposal (Quorate): the cost of verifying
+Measurements behind Vacuumlabs' Logos RFP-005 multisig proposal (Symeros): the cost of verifying
 M approval signatures inside a LEZ v0.3.1 program's `apply` call, proven for real with
 risc0-zkvm 3.0.5 on a CPU prover.
 
