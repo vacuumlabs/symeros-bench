@@ -1,0 +1,2 @@
+scheme,m,call,prover,po2,total_cycles,user_cycles,paging_cycles,segments,prove_s,verify_s,receipt_bytes,verified
+ed25519,8,plan,cpu,20,65536,22058,32487,1,5.52,0.010,225016,true

@@ -1,0 +1,58 @@
+=== 2026-10-13T23:01:48+00:00 patched noop M=1
+noop M=1 call=apply total=65536 user=7373 paging=23933 segs=1 po2=20 prove=5.82s verify=0.011s receipt=221690B verified=true
+rc=0 peak_rss_kb=617892
+=== 2026-10-13T23:02:00+00:00 patched noop M=8
+noop M=8 call=apply total=65536 user=14169 paging=25995 segs=1 po2=20 prove=5.90s verify=0.010s receipt=223146B verified=true
+rc=0 peak_rss_kb=618008
+=== 2026-10-13T23:02:06+00:00 patched schnorr-secp256k1 M=1
+schnorr-secp256k1 M=1 call=apply total=524288 user=276996 paging=37564 segs=1 po2=20 prove=52.07s verify=0.012s receipt=268666B verified=true
+rc=0 peak_rss_kb=4814748
+=== 2026-10-13T23:02:58+00:00 patched schnorr-secp256k1 M=3
+schnorr-secp256k1 M=3 call=apply total=1048576 user=817140 paging=38208 segs=1 po2=20 prove=93.93s verify=0.013s receipt=282330B verified=true
+rc=0 peak_rss_kb=9602196
+=== 2026-10-13T23:04:32+00:00 patched schnorr-secp256k1 M=5
+schnorr-secp256k1 M=5 call=apply total=1572864 user=1357215 paging=63982 segs=2 po2=20 prove=136.46s verify=0.024s receipt=550812B verified=true
+rc=0 peak_rss_kb=9616556
+=== 2026-10-13T23:06:49+00:00 patched schnorr-secp256k1 M=8
+schnorr-secp256k1 M=8 call=apply total=2359296 user=2159580 paging=82243 segs=3 po2=20 prove=205.69s verify=0.036s receipt=820526B verified=true
+rc=0 peak_rss_kb=9616236
+=== 2026-10-13T23:10:15+00:00 patched ecdsa-p256 M=1
+ecdsa-p256 M=1 call=apply total=262144 user=203604 paging=37681 segs=1 po2=20 prove=22.36s verify=0.011s receipt=256444B verified=true
+rc=0 peak_rss_kb=2416116
+=== 2026-10-13T23:10:37+00:00 patched ecdsa-p256 M=3
+ecdsa-p256 M=3 call=apply total=1048576 user=587386 paging=38325 segs=1 po2=20 prove=90.01s verify=0.013s receipt=282336B verified=true
+rc=0 peak_rss_kb=9584704
+=== 2026-10-13T23:12:07+00:00 patched ecdsa-p256 M=5
+ecdsa-p256 M=5 call=apply total=1048576 user=974261 paging=39021 segs=1 po2=20 prove=90.73s verify=0.013s receipt=282756B verified=true
+rc=0 peak_rss_kb=9621412
+=== 2026-10-13T23:13:38+00:00 patched ecdsa-p256 M=8
+ecdsa-p256 M=8 call=apply total=2097152 user=1547069 paging=66278 segs=2 po2=20 prove=181.52s verify=0.025s receipt=564700B verified=true
+rc=0 peak_rss_kb=9623444
+=== 2026-10-13T23:16:39+00:00 patched ed25519 M=1
+ed25519 M=1 call=apply total=1048576 user=904711 paging=61580 segs=1 po2=20 prove=90.04s verify=0.013s receipt=281914B verified=true
+rc=0 peak_rss_kb=9609132
+=== 2026-10-13T23:18:09+00:00 patched ed25519 M=3
+ed25519 M=3 call=apply total=3145728 user=2700446 paging=129540 segs=3 po2=20 prove=271.64s verify=0.038s receipt=844958B verified=true
+rc=0 peak_rss_kb=9613180
+=== 2026-10-13T23:22:41+00:00 patched ed25519 M=5
+ed25519 M=5 call=apply total=5242880 user=4484210 paging=217070 segs=5 po2=20 prove=449.26s verify=0.063s receipt=1408002B verified=true
+rc=0 peak_rss_kb=9613536
+=== 2026-10-13T23:30:10+00:00 patched ed25519 M=8
+ed25519 M=8 call=apply total=7864320 user=7161917 paging=354413 segs=8 po2=20 prove=671.90s verify=0.099s receipt=2239320B verified=true
+rc=0 peak_rss_kb=9613856
+=== 2026-10-13T23:41:22+00:00 unpatched noop M=1
+noop M=1 call=apply total=65536 user=7373 paging=23920 segs=1 po2=20 prove=5.51s verify=0.010s receipt=221690B verified=true
+rc=0 peak_rss_kb=618032
+=== 2026-10-13T23:41:28+00:00 unpatched ed25519 M=1
+ed25519 M=1 call=apply total=4194304 user=3526968 paging=109846 segs=4 po2=20 prove=357.58s verify=0.051s receipt=1125856B verified=true
+rc=0 peak_rss_kb=9610376
+=== 2026-10-13T23:47:26+00:00 unpatched ed25519 M=3
+ed25519 M=3 call=apply total=11534336 user=10564988 paging=267807 segs=11 po2=20 prove=984.70s verify=0.137s receipt=3095470B verified=true
+rc=0 peak_rss_kb=9622948
+=== 2026-10-14T00:03:50+00:00 unpatched ed25519 M=5
+ed25519 M=5 call=apply total=18874368 user=17559376 paging=427700 segs=18 po2=20 prove=1602.61s verify=0.224s receipt=5065084B verified=true
+rc=0 peak_rss_kb=9622840
+=== 2026-10-14T00:30:33+00:00 unpatched ed25519 M=8
+ed25519 M=8 call=apply total=29622272 user=28058686 paging=677519 segs=29 po2=20 prove=2528.86s verify=0.358s receipt=8134690B verified=true
+rc=0 peak_rss_kb=9623368
+ALLDONE

@@ -1,3 +1,26 @@
+# quorate-bench
+
+Measurements behind Vacuumlabs' Logos RFP-005 multisig proposal (Quorate): the cost of verifying
+M approval signatures inside a LEZ v0.3.1 program's `apply` call, proven for real with
+risc0-zkvm 3.0.5 on a CPU prover.
+
+- **Results:** [`RESULTS.md`](./RESULTS.md); raw CSVs and per-run logs in [`results/`](./results).
+- **What is measured:** the `apply` proof that verifies M signatures (M = 1, 3, 5, 8) for
+  Schnorr-secp256k1, ECDSA P-256 and Ed25519, plus Ed25519 as LEZ v0.3.1 ships it (no RISC0
+  patch). It is not a full LEZ transaction; see the caveats in `RESULTS.md`.
+- **Reproduce:** install the RISC Zero toolchain (`rzup`, r0vm 3.0.5), build with
+  `cargo build --release`, then run `scripts/run_matrix.sh patched "noop:1 schnorr-secp256k1:5"`
+  (any `scheme:M` list) and `python3 scripts/make_table.py`. For the unpatched Ed25519 variant,
+  copy the tree to `variants/ed25519-unpatched/`, apply `variants/ed25519-unpatched.patch`, use
+  `variants/ed25519-unpatched.Cargo.lock` as its `Cargo.lock`, build there and run
+  `scripts/run_matrix.sh unpatched "noop:1 ed25519:5"`.
+
+This is a fork of [fryorcraken/lez-signature-bench](https://github.com/fryorcraken/lez-signature-bench),
+ported from LEZ v0.2.0-rc3 to the v0.3.1 `plan`/`apply` program model and extended to eight
+distinct signers. The upstream README follows. Licensed MIT or Apache-2.0, as upstream.
+
+---
+
 # lez-signature-bench
 
 > ⚠️ **AI-generated codebase — research bench only.** This repository

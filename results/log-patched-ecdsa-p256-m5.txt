@@ -1,0 +1,24 @@
+ecdsa-p256 M=5 call=apply total=1048576 user=974261 paging=39021 segs=1 po2=20 prove=90.73s verify=0.013s receipt=282756B verified=true
+	Command being timed: "./target/release/bench --scheme ecdsa-p256 --n 5 --prover cpu --csv results/raw-patched.csv"
+	User time (seconds): 1328.62
+	System time (seconds): 5.86
+	Percent of CPU this job got: 1470%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:30.74
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9621412
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2471169
+	Voluntary context switches: 12496
+	Involuntary context switches: 34122
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

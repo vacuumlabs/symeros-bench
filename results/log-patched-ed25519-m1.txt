@@ -1,0 +1,24 @@
+ed25519 M=1 call=apply total=1048576 user=904711 paging=61580 segs=1 po2=20 prove=90.04s verify=0.013s receipt=281914B verified=true
+	Command being timed: "./target/release/bench --scheme ed25519 --n 1 --prover cpu --csv results/raw-patched.csv"
+	User time (seconds): 1320.72
+	System time (seconds): 6.18
+	Percent of CPU this job got: 1473%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:30.05
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9609132
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2422536
+	Voluntary context switches: 15907
+	Involuntary context switches: 57543
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

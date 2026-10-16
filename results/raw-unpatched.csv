@@ -1,0 +1,6 @@
+scheme,m,call,prover,po2,total_cycles,user_cycles,paging_cycles,segments,prove_s,verify_s,receipt_bytes,verified
+noop,1,apply,cpu,20,65536,7373,23920,1,5.51,0.010,221690,true
+ed25519,1,apply,cpu,20,4194304,3526968,109846,4,357.58,0.051,1125856,true
+ed25519,3,apply,cpu,20,11534336,10564988,267807,11,984.70,0.137,3095470,true
+ed25519,5,apply,cpu,20,18874368,17559376,427700,18,1602.61,0.224,5065084,true
+ed25519,8,apply,cpu,20,29622272,28058686,677519,29,2528.86,0.358,8134690,true

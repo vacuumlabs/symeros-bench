@@ -1,0 +1,24 @@
+schnorr-secp256k1 M=5 call=apply total=1572864 user=1357215 paging=63982 segs=2 po2=20 prove=136.46s verify=0.024s receipt=550812B verified=true
+	Command being timed: "./target/release/bench --scheme schnorr-secp256k1 --n 5 --prover cpu --csv results/raw-patched.csv"
+	User time (seconds): 1993.88
+	System time (seconds): 9.59
+	Percent of CPU this job got: 1467%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:16.49
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9616556
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3680551
+	Voluntary context switches: 31086
+	Involuntary context switches: 91460
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

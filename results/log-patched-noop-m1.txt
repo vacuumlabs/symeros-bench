@@ -1,0 +1,24 @@
+noop M=1 call=apply total=65536 user=7373 paging=23933 segs=1 po2=20 prove=5.82s verify=0.011s receipt=221690B verified=true
+	Command being timed: "./target/release/bench --scheme noop --n 1 --prover cpu --csv results/raw-patched.csv"
+	User time (seconds): 83.92
+	System time (seconds): 0.88
+	Percent of CPU this job got: 1453%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:05.83
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 617892
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 152470
+	Voluntary context switches: 11698
+	Involuntary context switches: 4529
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
